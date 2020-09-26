@@ -129,8 +129,6 @@ public class Mtd_Raices {
     }
     
     public static void main(String[] args) throws IOException, Exception {
-        Expresion e=new Expresion();
-        System.out.println(e.Evaluar("(4*(x)-3)^3", -3));
         
     }
     

@@ -6,6 +6,10 @@
 package Main;
 
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,11 +20,36 @@ public class AjusteCurvas extends javax.swing.JFrame {
     /**
      * Creates new form AjusteCurvas
      */
+    DefaultTableModel modelo;
+
+    public double[] captura(int a) {
+
+        double[] column = new double[tabla.getRowCount()];
+        int i = 0;
+        do {
+            column[i] = Double.parseDouble(modelo.getValueAt(i, 0).toString());
+
+            i++;
+        } while (i != tabla.getRowCount());
+        return column;
+
+    }
+
     public AjusteCurvas() {
         initComponents();
         setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.white);
-
+        modelo = new DefaultTableModel();
+        modelo.addColumn("X");
+        modelo.addColumn("Y");
+        tabla.setModel(modelo);
+        rsscalelabel.RSScaleLabel.setScaleLabel(btn_equal, "src/assets/icon_equal.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(btn_max, "src/assets/icon_max.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(btn_min, "src/assets/icon_min.png");
+        grado.setVisible(false);
+        jLabel2.setVisible(false);
+        grado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2", "3", "4", "5"}));
+        op_ac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Lineal", "Polinomica", "Exponencial", "Logaritmica"}));
     }
 
     /**
@@ -32,25 +61,138 @@ public class AjusteCurvas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        op_ac = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        grado = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        btn_equal = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btn_min = new javax.swing.JLabel();
+        btn_max = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setUndecorated(true);
         setResizable(false);
+        getContentPane().setLayout(null);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1280, Short.MAX_VALUE)
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tabla);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(23, 17, 256, 500);
+
+        op_ac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        op_ac.setBorder(null);
+        op_ac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                op_acActionPerformed(evt);
+            }
+        });
+        getContentPane().add(op_ac);
+        op_ac.setBounds(20, 569, 149, 26);
+
+        jLabel1.setText("Seleccione la linea de tendencia que desea");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(20, 535, 244, 16);
+
+        grado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(grado);
+        grado.setBounds(20, 640, 65, 26);
+
+        jLabel2.setText("Grado:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(20, 610, 37, 16);
+
+        btn_equal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_equalMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btn_equal);
+        btn_equal.setBounds(219, 569, 60, 60);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 895, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(331, 17, 895, 500);
+
+        btn_min.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_minMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btn_min);
+        btn_min.setBounds(285, 85, 40, 40);
+
+        btn_max.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_maxMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btn_max);
+        btn_max.setBounds(285, 27, 40, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_maxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_maxMouseClicked
+        String add[] = {"0", "0"};
+        modelo.addRow(add);// TODO add your handling code here:
+    }//GEN-LAST:event_btn_maxMouseClicked
+
+    private void btn_minMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_minMouseClicked
+        int a = modelo.getRowCount();
+        modelo.removeRow(a - 1);
+    }//GEN-LAST:event_btn_minMouseClicked
+
+    private void op_acActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_op_acActionPerformed
+        if (op_ac.getSelectedItem().equals("Polinomica")) {
+            jLabel2.setVisible(true);
+            grado.setVisible(true);
+        } else {
+            jLabel2.setVisible(false);
+            grado.setVisible(false);
+        }
+    }//GEN-LAST:event_op_acActionPerformed
+
+    private void btn_equalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_equalMouseClicked
+        try {
+            switch (op_ac.getSelectedIndex() + 1) {
+                case 1:
+                    double[] x = captura(0);
+                    double[] y = captura(1);
+                    break;
+                case 2:
+                    break;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Raices.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Ha habido un error en la muestra de los datos");
+        }
+    }//GEN-LAST:event_btn_equalMouseClicked
 
     /**
      * @param args the command line arguments
@@ -88,5 +230,15 @@ public class AjusteCurvas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btn_equal;
+    private javax.swing.JLabel btn_max;
+    private javax.swing.JLabel btn_min;
+    private javax.swing.JComboBox<String> grado;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> op_ac;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }
