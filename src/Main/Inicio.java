@@ -29,6 +29,8 @@ public class Inicio extends javax.swing.JFrame {
         rsscalelabel.RSScaleLabel.setScaleLabel(icon_logo, "src/assets/Inicio_logo.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(btn_close, "src/assets/icon_close.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(icon_inicio_1, "src/assets/icon_r_e.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(icon_inicio_2, "src/assets/icon_a_c.png");
+        Lbl_Raices1.setFont(FP);
         Lbl_Raices.setFont(FP);
         this.getContentPane().setBackground(Color.white);
     }
@@ -46,6 +48,8 @@ public class Inicio extends javax.swing.JFrame {
         icon_logo = new javax.swing.JLabel();
         icon_inicio_1 = new javax.swing.JLabel();
         Lbl_Raices = new javax.swing.JLabel();
+        icon_inicio_2 = new javax.swing.JLabel();
+        Lbl_Raices1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -70,7 +74,7 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().add(icon_logo);
         icon_logo.setBounds(50, 20, 310, 140);
         getContentPane().add(icon_inicio_1);
-        icon_inicio_1.setBounds(10, 190, 140, 60);
+        icon_inicio_1.setBounds(20, 190, 140, 60);
 
         Lbl_Raices.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         Lbl_Raices.setText("Raices de ecuaciones");
@@ -80,7 +84,19 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Lbl_Raices);
-        Lbl_Raices.setBounds(180, 200, 220, 50);
+        Lbl_Raices.setBounds(180, 190, 220, 50);
+        getContentPane().add(icon_inicio_2);
+        icon_inicio_2.setBounds(50, 280, 70, 70);
+
+        Lbl_Raices1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        Lbl_Raices1.setText("Ajuste de curvas");
+        Lbl_Raices1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Lbl_Raices1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(Lbl_Raices1);
+        Lbl_Raices1.setBounds(180, 290, 220, 50);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -107,6 +123,12 @@ public class Inicio extends javax.swing.JFrame {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Lbl_RaicesMouseClicked
+
+    private void Lbl_Raices1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Lbl_Raices1MouseClicked
+        AjusteCurvas a= new AjusteCurvas();
+        this.dispose();
+        a.setVisible(true);
+    }//GEN-LAST:event_Lbl_Raices1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -145,8 +167,10 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Lbl_Raices;
+    private javax.swing.JLabel Lbl_Raices1;
     private javax.swing.JLabel btn_close;
     private javax.swing.JLabel icon_inicio_1;
+    private javax.swing.JLabel icon_inicio_2;
     private javax.swing.JLabel icon_logo;
     // End of variables declaration//GEN-END:variables
 }
