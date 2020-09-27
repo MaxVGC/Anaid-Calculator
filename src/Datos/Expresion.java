@@ -39,7 +39,7 @@ public class Expresion {
         colaTokens = new LinkedList<Token>();
         StringBuffer entrada   = new StringBuffer(cadenaFuncion);
         Pattern pNumero = Pattern.compile("\\-?\\d+(\\.\\d+)?");
-       //Pattern pNumero = Pattern.compile("\\d+(\\.\\d+)?");
+        //Pattern pNumero = Pattern.compile("\\d+(\\.\\d+)?");
         Pattern pID     = Pattern.compile("\\p{Alpha}\\w+");
         while(entrada.length()>0) {
             Matcher      m  = pNumero.matcher(entrada);

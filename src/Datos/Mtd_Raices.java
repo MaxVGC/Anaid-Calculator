@@ -132,8 +132,8 @@ public class Mtd_Raices {
         Expresion e=new Expresion();
         double rt=3.137456991;
         double xx=2.508775151;
-        String res="("+rt+")+("+xx+")*log(x+1)";
-        System.out.println("res:"+(res)+"+    "+e.Evaluar(res,0));
+        String res="(log(x))";
+        System.out.println("res:"+(res)+"+    "+e.Evaluar(res,2));
     }
     
 }

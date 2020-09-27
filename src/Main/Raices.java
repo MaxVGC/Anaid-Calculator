@@ -11,19 +11,16 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Datos.Graficador;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import javax.imageio.ImageIO;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.AxisLocation;
+import org.jfree.chart.labels.StandardXYItemLabelGenerator;
+import org.jfree.chart.labels.XYItemLabelGenerator;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -47,7 +44,7 @@ public class Raices extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         rsscalelabel.RSScaleLabel.setScaleLabel(btn_close, "src/assets/icon_close.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(btn_equal, "src/assets/icon_equal.png");
-        XYDataset paresDeDatos = generarDatos("x", 0);
+        XYDataset paresDeDatos = generarDatos("x", 0, 0);
         JFreeChart diagrama = crearDiagrama(paresDeDatos);
         chartPanel = new ChartPanel(diagrama);
         grafica.setLayout(new java.awt.BorderLayout());
@@ -56,14 +53,19 @@ public class Raices extends javax.swing.JFrame {
         //Graficador g = new Graficador();
     }
 
-    private XYDataset generarDatos(String eq, int r) throws Exception {
+    private XYDataset generarDatos(String eq, int r, double raiz) throws Exception {
         //le pasamos una funcion generadora f(x)
         XYSeries datos = new XYSeries("Linea Funcion");
         for (double x = r - 5; x <= r + 5; x += 1) {
             datos.add(x, f(x, eq));
         }
+        XYSeries raizx = new XYSeries("Raiz");
+        raizx.add(raiz, 0);
+        raizx.add(0, 0);
+
         XYSeriesCollection conjuntoDatos = new XYSeriesCollection();
         conjuntoDatos.addSeries(datos);
+        conjuntoDatos.addSeries(raizx);
 
         return conjuntoDatos;
     }
@@ -86,6 +88,14 @@ public class Raices extends javax.swing.JFrame {
         xyplot.setRangeZeroBaselineVisible(true);
         xyplot.setDomainZeroBaselineVisible(true);
         xyplot.setOutlinePaint(Color.WHITE);
+        XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) xyplot.getRenderer();
+        renderer.setSeriesLinesVisible(1, false);
+        renderer.setSeriesShapesVisible(1, true);
+        XYItemLabelGenerator xy = new StandardXYItemLabelGenerator();
+//        renderer.setBaseItemLabelGenerator(xy);
+//        renderer.setBaseItemLabelsVisible(true);
+//        renderer.setBaseLinesVisible(true);
+//        renderer.setBaseItemLabelsVisible(true);
         return diag;
     }
 
@@ -267,7 +277,8 @@ public class Raices extends javax.swing.JFrame {
             lbl_mtd_fp.setText("X=" + mr.mtd_falsa_posicion(x, eq));
             lbl_mtd_sc1.setText("X=" + mr.mtd_secante_1(x, eq));
             lbl_mtd_sc2.setText("X=" + mr.mtd_secante_1(x, eq));
-            XYDataset paresDeDatos = generarDatos(eq, x);
+
+            XYDataset paresDeDatos = generarDatos(eq, x, mr.mtd_secante_1(x, eq));
             JFreeChart diagrama = crearDiagrama(paresDeDatos);
             chartPanel.setChart(diagrama);
 
@@ -289,10 +300,9 @@ public class Raices extends javax.swing.JFrame {
                 lbl_mtd_fp.setText("X=" + mr.mtd_falsa_posicion(x, eq));
                 lbl_mtd_sc1.setText("X=" + mr.mtd_secante_1(x, eq));
                 lbl_mtd_sc2.setText("X=" + mr.mtd_secante_1(x, eq));
-                XYDataset paresDeDatos = generarDatos(eq, x);
+                XYDataset paresDeDatos = generarDatos(eq, x, mr.mtd_secante_1(x, eq));
                 JFreeChart diagrama = crearDiagrama(paresDeDatos);
                 chartPanel.setChart(diagrama);
-                
 
             } catch (Exception ex) {
                 Logger.getLogger(Raices.class.getName()).log(Level.SEVERE, null, ex);
