@@ -19,6 +19,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -34,29 +35,63 @@ public class AjusteCurvas extends javax.swing.JFrame {
      */
     DefaultTableModel modelo;
 
+    private XYDataset generarDatos(String eq, int r, double[] x2, double[] y,int eje) throws Exception {
+        //le pasamos una funcion generadora f(x)
+
+        XYSeries datos = new XYSeries("Linea Funcion");
+        for (double x = 0; x <= eje; x += 1) {
+            datos.add(x, f(x, eq));
+        }
+
+        XYSeries serie3 = new XYSeries("Serie 3");
+        for (int x = 0; x <= r; x += 1) {
+            serie3.add(x2[x], y[x]);
+
+        }
+
+        XYSeriesCollection conjuntoDatos = new XYSeriesCollection();
+        conjuntoDatos.addSeries(datos);
+        conjuntoDatos.addSeries(serie3);
+
+        return conjuntoDatos;
+    }
+    
+    private XYDataset generarDatoslog(String eq, int r, double[] x2, double[] y,int eje) throws Exception {
+        //le pasamos una funcion generadora f(x)
+
+        XYSeries datos = new XYSeries("Linea Funcion");
+        for (double x = 1; x <= eje; x += 1) {
+            datos.add(x, f(x, eq));
+        }
+
+        XYSeries serie3 = new XYSeries("Serie 3");
+        for (int x = 0; x <= r; x += 1) {
+            serie3.add(x2[x], y[x]);
+
+        }
+
+        XYSeriesCollection conjuntoDatos = new XYSeriesCollection();
+        conjuntoDatos.addSeries(datos);
+        conjuntoDatos.addSeries(serie3);
+
+        return conjuntoDatos;
+    }
+    
+
     private XYDataset generarDatos(String eq, int r) throws Exception {
         //le pasamos una funcion generadora f(x)
         XYSeries datos = new XYSeries("Linea Funcion");
         for (double x = 0; x <= r; x += 1) {
             datos.add(x, f(x, eq));
         }
+
         XYSeriesCollection conjuntoDatos = new XYSeriesCollection();
         conjuntoDatos.addSeries(datos);
 
         return conjuntoDatos;
     }
+
     
-    private XYDataset generarDatoslog(String eq, int r) throws Exception {
-        //le pasamos una funcion generadora f(x)
-        XYSeries datos = new XYSeries("Linea Funcion");
-        for (double x = 1; x <= r; x += 1) {
-            datos.add(x, f(x, eq));
-        }
-        XYSeriesCollection conjuntoDatos = new XYSeriesCollection();
-        conjuntoDatos.addSeries(datos);
-
-        return conjuntoDatos;
-    }
 
     private JFreeChart crearDiagrama(XYDataset conjuntoDatos) throws IOException {
         JFreeChart diag = ChartFactory.createXYLineChart(
@@ -76,6 +111,9 @@ public class AjusteCurvas extends javax.swing.JFrame {
         xyplot.setRangeZeroBaselineVisible(true);
         xyplot.setDomainZeroBaselineVisible(true);
         xyplot.setOutlinePaint(Color.WHITE);
+        XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) xyplot.getRenderer();
+        renderer.setSeriesLinesVisible(1, false);
+        renderer.setSeriesShapesVisible(1, true);
         return diag;
     }
 
@@ -303,7 +341,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     String lineal = "(" + res[0] + ")+(" + res[1] + ")*x";
                     A0.setText("A0=" + res[0]);
                     A1.setText("A1=" + res[1]);
-                    XYDataset paresDeDatos = generarDatos(lineal, eje);
+                    XYDataset paresDeDatos = generarDatos(lineal, (x.length - 1), x, y,eje);
                     JFreeChart diagrama = crearDiagrama(paresDeDatos);
                     chartPanel.setChart(diagrama);
                     break;
@@ -314,7 +352,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     String exp = "(" + res3[0] + ")*exp((" + res3[1] + ")*x)";
                     A0.setText("A0=" + res3[0]);
                     A1.setText("A1=" + res3[1]);
-                    XYDataset paresDeDatos3 = generarDatos(exp, eje);
+                    XYDataset paresDeDatos3 = generarDatos(exp, (x.length - 1), x, y,eje);
                     JFreeChart diagrama3 = crearDiagrama(paresDeDatos3);
                     chartPanel.setChart(diagrama3);
                     break;
@@ -322,8 +360,8 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     double[] res4 = ac.A_Log(x, y);
                     A0.setText("A0=" + res4[0]);
                     A1.setText("A1=" + res4[1]);
-                    String log = "("+res4[0]+")+("+res4[1]+")*log(x)";
-                    XYDataset paresDeDatos4 = generarDatoslog(log, eje);
+                    String log = "(" + res4[0] + ")+(" + res4[1] + ")*log(x)";
+                    XYDataset paresDeDatos4 = generarDatoslog(log, (x.length - 1), x, y,eje);
                     JFreeChart diagrama4 = crearDiagrama(paresDeDatos4);
                     chartPanel.setChart(diagrama4);
                     break;
@@ -332,7 +370,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     String pot = "(" + res5[0] + ")*(x^(" + res5[1] + "))";
                     A0.setText("A0=" + res5[0]);
                     A1.setText("A1=" + res5[1]);
-                    XYDataset paresDeDatos5 = generarDatos(pot, eje);
+                    XYDataset paresDeDatos5 = generarDatos(pot, (x.length - 1), x, y,eje);
                     JFreeChart diagrama5 = crearDiagrama(paresDeDatos5);
                     chartPanel.setChart(diagrama5);
                     break;
