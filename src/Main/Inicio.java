@@ -125,9 +125,13 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_Lbl_RaicesMouseClicked
 
     private void Lbl_Raices1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Lbl_Raices1MouseClicked
-        AjusteCurvas a= new AjusteCurvas();
-        this.dispose();
-        a.setVisible(true);
+        try {
+            AjusteCurvas a= new AjusteCurvas();
+            this.dispose();
+            a.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_Lbl_Raices1MouseClicked
 
     /**

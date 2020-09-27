@@ -18,11 +18,14 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.chart.ui.*;
 import java.awt.Dimension;
+import org.jfree.chart.plot.XYPlot;
 public class Graficador extends ApplicationFrame {
 
+     
     public Graficador() throws Exception {
         super("Graficador");
         XYDataset paresDeDatos = generarDatos();
+        
         JFreeChart diagrama = crearDiagrama(paresDeDatos);
         ChartPanel chartPanel = new ChartPanel(diagrama);
         chartPanel.setPreferredSize(new Dimension(500, 400));
@@ -55,6 +58,8 @@ public class Graficador extends ApplicationFrame {
                 false, //tooltips
                 false //URL
         );
+        XYPlot xyplot = (XYPlot) diag.getPlot();
+     
         return diag;
     }
 
@@ -66,10 +71,10 @@ public class Graficador extends ApplicationFrame {
         return a;
     }
 
-//    public static void main(String[] arg) throws Exception {
-//        Graficador miGraficador = new Graficador();
-//        miGraficador.pack();
-//        //RefineryUtilities.centerFrameOnScreen(miGraficador);
-//        miGraficador.setVisible(true);
-//    }
+   public static void main(String[] arg) throws Exception {
+        Graficador miGraficador = new Graficador();
+        miGraficador.pack();
+        //RefineryUtilities.centerFrameOnScreen(miGraficador);
+        miGraficador.setVisible(true);
+    }
 }

@@ -129,7 +129,11 @@ public class Mtd_Raices {
     }
     
     public static void main(String[] args) throws IOException, Exception {
-        
+        Expresion e=new Expresion();
+        double rt=3.137456991;
+        double xx=2.508775151;
+        String res="("+rt+")+("+xx+")*log(x+1)";
+        System.out.println("res:"+(res)+"+    "+e.Evaluar(res,0));
     }
     
 }
