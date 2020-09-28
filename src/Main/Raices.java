@@ -294,6 +294,7 @@ public class Raices extends javax.swing.JFrame {
             try {
                 String eq = ecuacion.getText();
                 Mtd_Raices mr = new Mtd_Raices();
+                
                 Expresion e = new Expresion();
                 int x = mr.clc_raiz(eq);
                 lbl_mtd_bi.setText("X=" + mr.mtd_biseccion(x, eq));

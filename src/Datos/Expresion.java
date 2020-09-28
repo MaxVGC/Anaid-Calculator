@@ -192,6 +192,7 @@ public class Expresion {
     
     public double Evaluar(String a,double b) throws Exception{
         String funcion = a;
+        System.out.println(a);
         Expresion  exp = new Expresion(funcion);
         return exp.evaluar(b);
         
