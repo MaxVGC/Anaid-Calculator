@@ -130,16 +130,21 @@ public class Mtd_Raices {
         return xr;
     }
 
+    public static int fact(int n) {
+        if (n <= 2) {
+            return n;
+        }
+        return n * fact(n - 1);
+    }
+
     public static void main(String[] args) throws IOException, Exception {
-        Mtd_Raices d = new Mtd_Raices();
-        Tiempo t = new Tiempo();
-        t.Contar();
+        Expresion e = new Expresion();
+        int i=0;
         do {
-            System.out.println(1);
-        } while (t.getSegundos()!=10);
-        
-        t.Detener();
-        System.out.println("termine");
+            System.out.println(e.Evaluar("("+fact(i)+")*(2^x)", i));
+            i++;
+        } while (i!=10);
+
     }
 
 }
