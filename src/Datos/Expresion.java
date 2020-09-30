@@ -5,31 +5,43 @@ package Datos;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 /**
  *
  * @author carlo
  */
+import Main.AjusteCurvas;
 import java.util.*;
 import java.util.regex.*;
 import java.lang.reflect.*;
+import javax.swing.JOptionPane;
 
 public class Expresion {
 
     public Expresion() {
     }
-    enum TipoToken  {   NUMERO, VARIABLE, FUNCION, ADD, SUB, MUL, DIV,
-                        EXP, P_IZQ, P_DER, ERROR };
+
+    enum TipoToken {
+        NUMERO, VARIABLE, FUNCION, ADD, SUB, MUL, DIV,
+        EXP, P_IZQ, P_DER, ERROR
+    };
+
     class Token {
+
         TipoToken tipo;
-        String    texto;
-        Token(TipoToken ti, String te) { tipo=ti; texto=te;}
-        Token(TipoToken ti) { tipo = ti; }
+        String texto;
+
+        Token(TipoToken ti, String te) {
+            tipo = ti;
+            texto = te;
+        }
+
+        Token(TipoToken ti) {
+            tipo = ti;
+        }
     }
-    Queue<Token>    colaTokens;
-    String          cadenaFuncion;
-    double          variable;
+    Queue<Token> colaTokens;
+    String cadenaFuncion;
+    double variable;
 
     Expresion(String c) throws Exception {
         cadenaFuncion = c;
@@ -37,65 +49,65 @@ public class Expresion {
 
     private void generarTokens() throws Exception {
         colaTokens = new LinkedList<Token>();
-        StringBuffer entrada   = new StringBuffer(cadenaFuncion);
+        StringBuffer entrada = new StringBuffer(cadenaFuncion);
         Pattern pNumero = Pattern.compile("\\-?\\d+(\\.\\d+)?");
         //Pattern pNumero = Pattern.compile("\\d+(\\.\\d+)?");
-        Pattern pID     = Pattern.compile("\\p{Alpha}\\w+");
-        while(entrada.length()>0) {
-            Matcher      m  = pNumero.matcher(entrada);
-            if(m.lookingAt()) {
-                colaTokens.add(new Token(TipoToken.NUMERO,m.group()));
+        Pattern pID = Pattern.compile("\\p{Alpha}\\w+");
+        while (entrada.length() > 0) {
+            Matcher m = pNumero.matcher(entrada);
+            if (m.lookingAt()) {
+                colaTokens.add(new Token(TipoToken.NUMERO, m.group()));
                 entrada.delete(0, m.end());
                 continue;
             }
-            if(entrada.charAt(0) == 'x' || entrada.charAt(0) == 'X') {
-                colaTokens.add(new Token(TipoToken.VARIABLE,"x"));
+            if (entrada.charAt(0) == 'x' || entrada.charAt(0) == 'X') {
+                colaTokens.add(new Token(TipoToken.VARIABLE, "x"));
                 entrada.deleteCharAt(0);
                 continue;
             }
-            if(entrada.charAt(0) == '+') {
+            if (entrada.charAt(0) == '+') {
                 colaTokens.add(new Token(TipoToken.ADD));
                 entrada.deleteCharAt(0);
                 continue;
             }
-            if(entrada.charAt(0) == '-') {
+            if (entrada.charAt(0) == '-') {
                 colaTokens.add(new Token(TipoToken.SUB));
                 entrada.deleteCharAt(0);
                 continue;
             }
-            if(entrada.charAt(0) == '*') {
+            if (entrada.charAt(0) == '*') {
                 colaTokens.add(new Token(TipoToken.MUL));
                 entrada.deleteCharAt(0);
                 continue;
             }
-            if(entrada.charAt(0) == '/') {
+            if (entrada.charAt(0) == '/') {
                 colaTokens.add(new Token(TipoToken.DIV));
                 entrada.deleteCharAt(0);
                 continue;
             }
-            if(entrada.charAt(0) == '(') {
+            if (entrada.charAt(0) == '(') {
                 colaTokens.add(new Token(TipoToken.P_IZQ));
                 entrada.deleteCharAt(0);
                 continue;
             }
-            if(entrada.charAt(0) == ')') {
+            if (entrada.charAt(0) == ')') {
                 colaTokens.add(new Token(TipoToken.P_DER));
                 entrada.deleteCharAt(0);
                 continue;
             }
-            if(entrada.charAt(0) == '^') {
+            if (entrada.charAt(0) == '^') {
                 colaTokens.add(new Token(TipoToken.EXP));
                 entrada.deleteCharAt(0);
                 continue;
             }
             m = pID.matcher(entrada);
-            if(m.lookingAt()) {
+            if (m.lookingAt()) {
                 colaTokens.add(new Token(TipoToken.FUNCION, m.group()));
                 entrada.delete(0, m.end());
                 continue;
             }
-            throw new Exception("Elemento no reconocido en la entrada: " 
-                                 + entrada.charAt(0));
+            throw new Exception("Elemento no reconocido en la entrada: "
+                    + entrada.charAt(0));
         }
     }
 
@@ -106,15 +118,17 @@ public class Expresion {
     }
 
     private double expresion() {
-        double respuesta=termino();
-        while(!colaTokens.isEmpty() ) {
-            switch(colaTokens.element().tipo) {
-                case ADD:   colaTokens.remove();
-                            respuesta+=termino();
-                            continue;
-                case SUB:   colaTokens.remove();
-                            respuesta-=termino();
-                            continue;
+        double respuesta = termino();
+        while (!colaTokens.isEmpty()) {
+            switch (colaTokens.element().tipo) {
+                case ADD:
+                    colaTokens.remove();
+                    respuesta += termino();
+                    continue;
+                case SUB:
+                    colaTokens.remove();
+                    respuesta -= termino();
+                    continue;
             }
             break;
         }
@@ -122,15 +136,17 @@ public class Expresion {
     }
 
     private double termino() {
-        double respuesta=factor();
-        while(!colaTokens.isEmpty() ) {
-            switch(colaTokens.element().tipo) {
-                case MUL:   colaTokens.remove();
-                            respuesta*=factor();
-                            continue;
-                case DIV:   colaTokens.remove();
-                            respuesta/=factor();
-                            continue;
+        double respuesta = factor();
+        while (!colaTokens.isEmpty()) {
+            switch (colaTokens.element().tipo) {
+                case MUL:
+                    colaTokens.remove();
+                    respuesta *= factor();
+                    continue;
+                case DIV:
+                    colaTokens.remove();
+                    respuesta /= factor();
+                    continue;
                 default:
             }
             break;
@@ -139,12 +155,13 @@ public class Expresion {
     }
 
     private double factor() {
-        double respuesta=valor();
-        while(!colaTokens.isEmpty() ) {
-            switch(colaTokens.element().tipo) {
-                case EXP:   colaTokens.remove();
-                            respuesta=Math.pow(respuesta,valor());
-                            continue;
+        double respuesta = valor();
+        while (!colaTokens.isEmpty()) {
+            switch (colaTokens.element().tipo) {
+                case EXP:
+                    colaTokens.remove();
+                    respuesta = Math.pow(respuesta, valor());
+                    continue;
             }
             break;
         }
@@ -156,24 +173,27 @@ public class Expresion {
         Token token;
         try {
             double respuesta = 0;
-            token     = colaTokens.poll();
-            switch(token.tipo) {
-                case P_IZQ:     respuesta = expresion();
-                                leaToken(TipoToken.P_DER);
-                                return respuesta;
-                case NUMERO:    return Double.parseDouble(token.texto);
-                case VARIABLE:  return variable;
-                case FUNCION:   leaToken(TipoToken.P_IZQ);
-                                double argumento=expresion();
-                                leaToken(TipoToken.P_DER);
-                                Method m = java.lang.Math.class.
-                                           getMethod(token.texto, Double.TYPE);
-                                return (Double) m.invoke(null, argumento);
+            token = colaTokens.poll();
+            switch (token.tipo) {
+                case P_IZQ:
+                    respuesta = expresion();
+                    leaToken(TipoToken.P_DER);
+                    return respuesta;
+                case NUMERO:
+                    return Double.parseDouble(token.texto);
+                case VARIABLE:
+                    return variable;
+                case FUNCION:
+                    leaToken(TipoToken.P_IZQ);
+                    double argumento = expresion();
+                    leaToken(TipoToken.P_DER);
+                    Method m = java.lang.Math.class.
+                            getMethod(token.texto, Double.TYPE);
+                    return (Double) m.invoke(null, argumento);
             }
             return respuesta;
-        }
-        catch(Exception ex) {
-            System.err.println("Error: "  + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("Error: " + ex.getMessage());
             System.exit(0);
         }
         return 0;
@@ -181,22 +201,19 @@ public class Expresion {
 
     private boolean leaToken(TipoToken t) {
         Token token = colaTokens.poll();
-        if(token.tipo.equals(t)) {
+        if (token.tipo.equals(t)) {
             return true;
-        }
-        else {
-            System.err.println("Error: elemento no permitido "  + token.texto );
+        } else {
+            JOptionPane.showMessageDialog(null,"Error: elemento no permitido " + token.texto );
+            System.exit(0);
             return false;
         }
     }
-    
-    public double Evaluar(String a,double b) throws Exception{
+
+    public double Evaluar(String a, double b) throws Exception {
         String funcion = a;
-        System.out.println(a);
-        Expresion  exp = new Expresion(funcion);
+        Expresion exp = new Expresion(funcion);
         return exp.evaluar(b);
-        
-        
     }
 
 }

@@ -7,12 +7,15 @@ package Main;
 
 import Datos.Expresion;
 import Datos.Mtd_Raices;
+import Datos.Tiempo;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
+import javax.swing.ImageIcon;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -49,8 +52,31 @@ public class Raices extends javax.swing.JFrame {
         chartPanel = new ChartPanel(diagrama);
         grafica.setLayout(new java.awt.BorderLayout());
         grafica.add(chartPanel, BorderLayout.CENTER);
-
         //Graficador g = new Graficador();
+    }
+
+    public void HiloRaices() {
+        Runnable miRunnable = new Runnable() {
+            public void run() {
+                try {
+                    ecuacion.setEditable(false);
+                    ecuacion.setFocusable(false);
+                    btn_equal.setFocusable(false);
+                    carga.setIcon(new ImageIcon("src/assets/carga.gif"));
+                    boolean x = RaicesX();
+                    if (x == true) {
+                        btn_equal.setFocusable(true);
+                        ecuacion.setEditable(true);
+                        ecuacion.setFocusable(true);
+                        carga.setIcon(null);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        Thread hilo = new Thread(miRunnable);
+        hilo.start();
     }
 
     private XYDataset generarDatos(String eq, int r, double raiz) throws Exception {
@@ -68,6 +94,28 @@ public class Raices extends javax.swing.JFrame {
         conjuntoDatos.addSeries(raizx);
 
         return conjuntoDatos;
+    }
+
+    public boolean RaicesX() {
+        try {
+            String eq = ecuacion.getText();
+            Mtd_Raices mr = new Mtd_Raices();
+            Expresion e = new Expresion();
+            int x = mr.clc_raiz(eq);
+            lbl_mtd_bi.setText("X=" + mr.mtd_biseccion(x, eq));
+            lbl_mtd_fp.setText("X=" + mr.mtd_falsa_posicion(x, eq));
+            lbl_mtd_sc1.setText("X=" + mr.mtd_secante_1(x, eq));
+            lbl_mtd_sc2.setText("X=" + mr.mtd_secante_1(x, eq));
+
+            XYDataset paresDeDatos = generarDatos(eq, x, mr.mtd_secante_1(x, eq));
+            JFreeChart diagrama = crearDiagrama(paresDeDatos);
+            chartPanel.setChart(diagrama);
+            return true;
+
+        } catch (Exception ex) {
+            Logger.getLogger(Raices.class.getName()).log(Level.SEVERE, null, ex);
+            return true;
+        }
     }
 
     private JFreeChart crearDiagrama(XYDataset conjuntoDatos) throws IOException {
@@ -115,6 +163,7 @@ public class Raices extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        carga = new javax.swing.JLabel();
         grafica = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         ecuacion = new javax.swing.JTextField();
@@ -131,13 +180,26 @@ public class Raices extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusable(false);
+        setMinimumSize(new java.awt.Dimension(1280, 720));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
+        getContentPane().setLayout(null);
+
+        carga.setMaximumSize(new java.awt.Dimension(1280, 720));
+        carga.setMinimumSize(new java.awt.Dimension(1280, 720));
+        carga.setPreferredSize(new java.awt.Dimension(1280, 720));
+        getContentPane().add(carga);
+        carga.setBounds(0, 0, 1280, 720);
 
         grafica.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(grafica);
+        grafica.setBounds(389, 118, 850, 570);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel1.setText("Ingrese la ecuacion");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(42, 35, 329, 65);
 
         ecuacion.setBackground(new java.awt.Color(255, 255, 255));
         ecuacion.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
@@ -149,12 +211,16 @@ public class Raices extends javax.swing.JFrame {
                 ecuacionKeyPressed(evt);
             }
         });
+        getContentPane().add(ecuacion);
+        ecuacion.setBounds(389, 35, 767, 65);
 
         btn_equal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_equalMouseClicked(evt);
             }
         });
+        getContentPane().add(btn_equal);
+        btn_equal.setBounds(1162, 35, 65, 65);
 
         btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -167,90 +233,48 @@ public class Raices extends javax.swing.JFrame {
                 btn_closeMouseExited(evt);
             }
         });
+        getContentPane().add(btn_close);
+        btn_close.setBounds(1240, 0, 40, 40);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setText("Metodo biseccion");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(42, 118, 205, 32);
 
         lbl_mtd_bi.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lbl_mtd_bi.setText("Esperando ecuacion...");
+        getContentPane().add(lbl_mtd_bi);
+        lbl_mtd_bi.setBounds(42, 168, 193, 24);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel3.setText("Metodo falsa posicion");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(42, 210, 255, 32);
 
         lbl_mtd_fp.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lbl_mtd_fp.setText("Esperando ecuacion...");
+        getContentPane().add(lbl_mtd_fp);
+        lbl_mtd_fp.setBounds(42, 260, 193, 24);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel4.setText("Metodo secante");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(42, 302, 182, 32);
 
         lbl_mtd_sc1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lbl_mtd_sc1.setText("Esperando ecuacion...");
+        getContentPane().add(lbl_mtd_sc1);
+        lbl_mtd_sc1.setBounds(42, 352, 193, 24);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel5.setText("Metodo secante modificada");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(42, 394, 316, 32);
 
         lbl_mtd_sc2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lbl_mtd_sc2.setText("Esperando ecuacion...");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(lbl_mtd_sc2)
-                    .addComponent(lbl_mtd_fp)
-                    .addComponent(lbl_mtd_bi)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(lbl_mtd_sc1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(ecuacion, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_equal, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
-                    .addComponent(grafica, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_equal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ecuacion)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_mtd_bi)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_mtd_fp)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_mtd_sc1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_mtd_sc2))
-                    .addComponent(grafica, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        getContentPane().add(lbl_mtd_sc2);
+        lbl_mtd_sc2.setBounds(42, 444, 193, 24);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -268,46 +292,12 @@ public class Raices extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_closeMouseExited
 
     private void btn_equalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_equalMouseClicked
-        try {
-            String eq = ecuacion.getText();
-            Mtd_Raices mr = new Mtd_Raices();
-            Expresion e = new Expresion();
-            int x = mr.clc_raiz(eq);
-            lbl_mtd_bi.setText("X=" + mr.mtd_biseccion(x, eq));
-            lbl_mtd_fp.setText("X=" + mr.mtd_falsa_posicion(x, eq));
-            lbl_mtd_sc1.setText("X=" + mr.mtd_secante_1(x, eq));
-            lbl_mtd_sc2.setText("X=" + mr.mtd_secante_1(x, eq));
-
-            XYDataset paresDeDatos = generarDatos(eq, x, mr.mtd_secante_1(x, eq));
-            JFreeChart diagrama = crearDiagrama(paresDeDatos);
-            chartPanel.setChart(diagrama);
-
-        } catch (Exception ex) {
-            Logger.getLogger(Raices.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
+        HiloRaices();
     }//GEN-LAST:event_btn_equalMouseClicked
 
     private void ecuacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ecuacionKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            try {
-                String eq = ecuacion.getText();
-                Mtd_Raices mr = new Mtd_Raices();
-                
-                Expresion e = new Expresion();
-                int x = mr.clc_raiz(eq);
-                lbl_mtd_bi.setText("X=" + mr.mtd_biseccion(x, eq));
-                lbl_mtd_fp.setText("X=" + mr.mtd_falsa_posicion(x, eq));
-                lbl_mtd_sc1.setText("X=" + mr.mtd_secante_1(x, eq));
-                lbl_mtd_sc2.setText("X=" + mr.mtd_secante_1(x, eq));
-                XYDataset paresDeDatos = generarDatos(eq, x, mr.mtd_secante_1(x, eq));
-                JFreeChart diagrama = crearDiagrama(paresDeDatos);
-                chartPanel.setChart(diagrama);
-
-            } catch (Exception ex) {
-                Logger.getLogger(Raices.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            HiloRaices();
         }
     }//GEN-LAST:event_ecuacionKeyPressed
 
@@ -320,8 +310,10 @@ public class Raices extends javax.swing.JFrame {
             public void run() {
                 try {
                     new Raices().setVisible(true);
+
                 } catch (Exception ex) {
-                    Logger.getLogger(Raices.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Raices.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -330,6 +322,7 @@ public class Raices extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btn_close;
     private javax.swing.JLabel btn_equal;
+    private javax.swing.JLabel carga;
     private javax.swing.JTextField ecuacion;
     private javax.swing.JPanel grafica;
     private javax.swing.JLabel jLabel1;
