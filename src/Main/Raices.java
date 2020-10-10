@@ -5,6 +5,7 @@
  */
 package Main;
 //piñeros hp
+
 import Datos.Expresion;
 import Datos.Mtd_Raices;
 import Datos.Tiempo;
@@ -46,6 +47,7 @@ public class Raices extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.white);
         setLocationRelativeTo(null);
         rsscalelabel.RSScaleLabel.setScaleLabel(btn_close, "src/assets/icon_close.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(btn_home, "src/assets/icon_home.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(btn_equal, "src/assets/icon_equal.png");
         XYDataset paresDeDatos = generarDatos("x", 0, 0);
         JFreeChart diagrama = crearDiagrama(paresDeDatos);
@@ -168,6 +170,7 @@ public class Raices extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         ecuacion = new javax.swing.JTextField();
         btn_equal = new javax.swing.JLabel();
+        btn_home = new javax.swing.JLabel();
         btn_close = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lbl_mtd_bi = new javax.swing.JLabel();
@@ -220,6 +223,14 @@ public class Raices extends javax.swing.JFrame {
         });
         getContentPane().add(btn_equal);
         btn_equal.setBounds(1162, 35, 65, 65);
+
+        btn_home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_homeMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btn_home);
+        btn_home.setBounds(1240, 60, 40, 40);
 
         btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -300,6 +311,12 @@ public class Raices extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ecuacionKeyPressed
 
+    private void btn_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMouseClicked
+        Inicio a = new Inicio();
+        this.dispose();
+        a.setVisible(true);
+    }//GEN-LAST:event_btn_homeMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -321,6 +338,7 @@ public class Raices extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btn_close;
     private javax.swing.JLabel btn_equal;
+    private javax.swing.JLabel btn_home;
     private javax.swing.JLabel carga;
     private javax.swing.JTextField ecuacion;
     private javax.swing.JPanel grafica;

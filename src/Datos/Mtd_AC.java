@@ -96,7 +96,7 @@ public class Mtd_AC {
                 smlny = smlny + Math.log(y[i]);
                 smxlny = smxlny + x[i] * Math.log(y[i]);
             } else {
-                JOptionPane.showMessageDialog(null, "Ha habido un error en la muestra de los datos, no pueden haber 0 en los valores de Y");
+                JOptionPane.showMessageDialog(null, "Hubo un error en la muestra de los datos, no pueden haber 0 en los valores de Y");
                 return null;
             }
             i++;

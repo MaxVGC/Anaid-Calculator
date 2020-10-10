@@ -151,8 +151,13 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_Lbl_Raices1MouseClicked
 
     private void Lbl_Raices2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Lbl_Raices2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Lbl_Raices2MouseClicked
+        try {
+            Integracion a = new Integracion();
+            this.dispose();
+            a.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }    }//GEN-LAST:event_Lbl_Raices2MouseClicked
 
     /**
      * @param args the command line arguments

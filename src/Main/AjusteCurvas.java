@@ -140,6 +140,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         rsscalelabel.RSScaleLabel.setScaleLabel(jLabel3, "src/assets/icon_close.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel4, "src/assets/icon_home.png");
         this.getContentPane().setBackground(Color.white);
         modelo = new DefaultTableModel();
         modelo.addColumn("X");
@@ -149,7 +150,6 @@ public class AjusteCurvas extends javax.swing.JFrame {
         rsscalelabel.RSScaleLabel.setScaleLabel(btn_max, "src/assets/icon_max.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(btn_min, "src/assets/icon_min.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(eq, "src/assets/eq_lineal.png");
-
         grado.setVisible(false);
         jLabel2.setVisible(false);
         grado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2", "3", "4", "5"}));
@@ -182,6 +182,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
         btn_max = new javax.swing.JLabel();
         A1 = new javax.swing.JLabel();
         A0 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         eq = new javax.swing.JLabel();
         n = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -276,6 +277,14 @@ public class AjusteCurvas extends javax.swing.JFrame {
         A0.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         getContentPane().add(A0);
         A0.setBounds(330, 550, 100, 30);
+
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(1240, 60, 40, 40);
 
         eq.setMaximumSize(new java.awt.Dimension(40, 15));
         eq.setMinimumSize(new java.awt.Dimension(40, 15));
@@ -406,6 +415,12 @@ public class AjusteCurvas extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel3MouseClicked
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        Inicio a = new Inicio();
+        this.dispose();
+        a.setVisible(true);
+    }//GEN-LAST:event_jLabel4MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -457,6 +472,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel n;
     private javax.swing.JComboBox<String> op_ac;

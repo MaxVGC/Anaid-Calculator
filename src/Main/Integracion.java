@@ -27,6 +27,8 @@ public class Integracion extends javax.swing.JFrame {
     public Integracion() {
         initComponents();
         FP = Fuentes.setFuente("/assets/font_1.ttf");
+        rsscalelabel.RSScaleLabel.setScaleLabel(btn_close, "src/assets/icon_close.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(btn_home, "src/assets/icon_home.png");
         setLocationRelativeTo(null);
         Lbl_1.setFont(FP);
         Lbl_2.setFont(FP);
@@ -69,9 +71,10 @@ public class Integracion extends javax.swing.JFrame {
         Lbl_3 = new javax.swing.JLabel();
         Lbl_2 = new javax.swing.JLabel();
         clc = new javax.swing.JButton();
+        btn_home = new javax.swing.JLabel();
+        btn_close = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(455, 720));
         setMinimumSize(new java.awt.Dimension(455, 720));
         setUndecorated(true);
         setResizable(false);
@@ -172,6 +175,28 @@ public class Integracion extends javax.swing.JFrame {
         getContentPane().add(clc);
         clc.setBounds(155, 620, 150, 70);
 
+        btn_home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_homeMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btn_home);
+        btn_home.setBounds(110, 650, 40, 40);
+
+        btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_closeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_closeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_closeMouseExited(evt);
+            }
+        });
+        getContentPane().add(btn_close);
+        btn_close.setBounds(310, 650, 40, 40);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -197,7 +222,7 @@ public class Integracion extends javax.swing.JFrame {
                     Smps_1_3.setText("" + m.mtd_smps_1_3(A, B, N, funcion.getText()));
                     Smps_3_8.setText("No se puede usar este metodo con la N tomada");
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Ha habido un error de escritura, Puede que la funcion este mal escrita o falten datos");
+                    JOptionPane.showMessageDialog(null, "Hubo un error de escritura, Puede que la funcion este mal escrita o falten datos");
                 }
             } else {
                 try {
@@ -205,14 +230,32 @@ public class Integracion extends javax.swing.JFrame {
                     Smps_1_3.setText("" + m.mtd_smps_1_3(A, B, N, funcion.getText()));
                     Smps_3_8.setText("" + m.mtd_smps_3_8(A, B, N, funcion.getText()));
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Ha habido un error de escritura, Puede que la funcion este mal escrita o falten datos");
+                    JOptionPane.showMessageDialog(null, "Hubo un error de escritura, Puede que la funcion este mal escrita o falten datos");
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Ha habido un error de escritura, B no puede ser menor ni igual a A");
+            JOptionPane.showMessageDialog(null, "Hubo un error de escritura, B no puede ser menor ni igual a A");
 
         }
     }//GEN-LAST:event_clcMouseClicked
+
+    private void btn_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMouseClicked
+        Inicio a = new Inicio();
+        this.dispose();
+        a.setVisible(true);
+    }//GEN-LAST:event_btn_homeMouseClicked
+
+    private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_btn_closeMouseClicked
+
+    private void btn_closeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseEntered
+        rsscalelabel.RSScaleLabel.setScaleLabel(btn_close, "src/assets/icon_close_focus.png");
+    }//GEN-LAST:event_btn_closeMouseEntered
+
+    private void btn_closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseExited
+        rsscalelabel.RSScaleLabel.setScaleLabel(btn_close, "src/assets/icon_close.png");
+    }//GEN-LAST:event_btn_closeMouseExited
 
     /**
      * @param args the command line arguments
@@ -264,6 +307,8 @@ public class Integracion extends javax.swing.JFrame {
     private javax.swing.JLabel Smps_1_3;
     private javax.swing.JLabel Smps_3_8;
     private javax.swing.JLabel Trapecio;
+    private javax.swing.JLabel btn_close;
+    private javax.swing.JLabel btn_home;
     private javax.swing.JButton clc;
     private javax.swing.JTextField funcion;
     private javax.swing.JLabel icon_integral;
