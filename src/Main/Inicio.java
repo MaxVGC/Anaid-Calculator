@@ -102,7 +102,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Lbl_Raices2);
-        Lbl_Raices2.setBounds(180, 380, 220, 50);
+        Lbl_Raices2.setBounds(180, 390, 220, 50);
 
         Lbl_Raices1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         Lbl_Raices1.setText("Ajuste de curvas");

@@ -172,14 +172,6 @@ public class Mtd_Raices {
         return n * fact(n - 1);
     }
 
-    public static void main(String[] args) throws IOException, Exception {
-        Expresion e = new Expresion();
-        int i = 0;
-        do {
-            System.out.println(e.Evaluar("(" + fact(i) + ")*(2^x)", i));
-            i++;
-        } while (i != 10);
-
-    }
+    
 
 }

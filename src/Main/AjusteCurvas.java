@@ -35,7 +35,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
      */
     DefaultTableModel modelo;
 
-    private XYDataset generarDatos(String eq, int r, double[] x2, double[] y,int eje) throws Exception {
+    private XYDataset generarDatos(String eq, int r, double[] x2, double[] y, int eje) throws Exception {
         //le pasamos una funcion generadora f(x)
 
         XYSeries datos = new XYSeries("Linea Funcion");
@@ -55,8 +55,8 @@ public class AjusteCurvas extends javax.swing.JFrame {
 
         return conjuntoDatos;
     }
-    
-    private XYDataset generarDatoslog(String eq, int r, double[] x2, double[] y,int eje) throws Exception {
+
+    private XYDataset generarDatoslog(String eq, int r, double[] x2, double[] y, int eje) throws Exception {
         //le pasamos una funcion generadora f(x)
 
         XYSeries datos = new XYSeries("Linea Funcion");
@@ -76,7 +76,6 @@ public class AjusteCurvas extends javax.swing.JFrame {
 
         return conjuntoDatos;
     }
-    
 
     private XYDataset generarDatos(String eq, int r) throws Exception {
         //le pasamos una funcion generadora f(x)
@@ -90,8 +89,6 @@ public class AjusteCurvas extends javax.swing.JFrame {
 
         return conjuntoDatos;
     }
-
-    
 
     private JFreeChart crearDiagrama(XYDataset conjuntoDatos) throws IOException {
         JFreeChart diag = ChartFactory.createXYLineChart(
@@ -142,6 +139,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
     public AjusteCurvas() throws Exception {
         initComponents();
         setLocationRelativeTo(null);
+        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel3, "src/assets/icon_close.png");
         this.getContentPane().setBackground(Color.white);
         modelo = new DefaultTableModel();
         modelo.addColumn("X");
@@ -186,6 +184,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
         A0 = new javax.swing.JLabel();
         eq = new javax.swing.JLabel();
         n = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -288,6 +287,20 @@ public class AjusteCurvas extends javax.swing.JFrame {
         getContentPane().add(n);
         n.setBounds(290, 140, 60, 16);
 
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel3MouseExited(evt);
+            }
+        });
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(1240, 0, 40, 40);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -341,7 +354,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     String lineal = "(" + res[0] + ")+(" + res[1] + ")*x";
                     A0.setText("A0=" + res[0]);
                     A1.setText("A1=" + res[1]);
-                    XYDataset paresDeDatos = generarDatos(lineal, (x.length - 1), x, y,eje);
+                    XYDataset paresDeDatos = generarDatos(lineal, (x.length - 1), x, y, eje);
                     JFreeChart diagrama = crearDiagrama(paresDeDatos);
                     chartPanel.setChart(diagrama);
                     break;
@@ -352,7 +365,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     String exp = "(" + res3[0] + ")*exp((" + res3[1] + ")*x)";
                     A0.setText("A0=" + res3[0]);
                     A1.setText("A1=" + res3[1]);
-                    XYDataset paresDeDatos3 = generarDatos(exp, (x.length - 1), x, y,eje);
+                    XYDataset paresDeDatos3 = generarDatos(exp, (x.length - 1), x, y, eje);
                     JFreeChart diagrama3 = crearDiagrama(paresDeDatos3);
                     chartPanel.setChart(diagrama3);
                     break;
@@ -361,7 +374,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     A0.setText("A0=" + res4[0]);
                     A1.setText("A1=" + res4[1]);
                     String log = "(" + res4[0] + ")+(" + res4[1] + ")*log(x)";
-                    XYDataset paresDeDatos4 = generarDatoslog(log, (x.length - 1), x, y,eje);
+                    XYDataset paresDeDatos4 = generarDatoslog(log, (x.length - 1), x, y, eje);
                     JFreeChart diagrama4 = crearDiagrama(paresDeDatos4);
                     chartPanel.setChart(diagrama4);
                     break;
@@ -370,7 +383,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     String pot = "(" + res5[0] + ")*(x^(" + res5[1] + "))";
                     A0.setText("A0=" + res5[0]);
                     A1.setText("A1=" + res5[1]);
-                    XYDataset paresDeDatos5 = generarDatos(pot, (x.length - 1), x, y,eje);
+                    XYDataset paresDeDatos5 = generarDatos(pot, (x.length - 1), x, y, eje);
                     JFreeChart diagrama5 = crearDiagrama(paresDeDatos5);
                     chartPanel.setChart(diagrama5);
                     break;
@@ -380,6 +393,18 @@ public class AjusteCurvas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ha habido un error en la muestra de los datos");
         }
     }//GEN-LAST:event_btn_equalMouseClicked
+
+    private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
+        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel3, "src/assets/icon_close_focus.png");
+    }//GEN-LAST:event_jLabel3MouseEntered
+
+    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
+        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel3, "src/assets/icon_close.png");
+    }//GEN-LAST:event_jLabel3MouseExited
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -431,6 +456,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
     private javax.swing.JPanel grafica;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel n;
     private javax.swing.JComboBox<String> op_ac;

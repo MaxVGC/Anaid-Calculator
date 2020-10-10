@@ -182,7 +182,6 @@ public class Raices extends javax.swing.JFrame {
         setFocusable(false);
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -197,7 +196,7 @@ public class Raices extends javax.swing.JFrame {
         grafica.setBounds(389, 118, 850, 570);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel1.setText("Ingrese la ecuacion");
+        jLabel1.setText("Ingrese la ecuación");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(42, 35, 329, 65);
 
@@ -242,7 +241,7 @@ public class Raices extends javax.swing.JFrame {
         jLabel2.setBounds(42, 118, 205, 32);
 
         lbl_mtd_bi.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lbl_mtd_bi.setText("Esperando ecuacion...");
+        lbl_mtd_bi.setText("Esperando ecuación...");
         getContentPane().add(lbl_mtd_bi);
         lbl_mtd_bi.setBounds(42, 168, 193, 24);
 
@@ -252,7 +251,7 @@ public class Raices extends javax.swing.JFrame {
         jLabel3.setBounds(42, 210, 255, 32);
 
         lbl_mtd_fp.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lbl_mtd_fp.setText("Esperando ecuacion...");
+        lbl_mtd_fp.setText("Esperando ecuación...");
         getContentPane().add(lbl_mtd_fp);
         lbl_mtd_fp.setBounds(42, 260, 193, 24);
 
@@ -262,7 +261,7 @@ public class Raices extends javax.swing.JFrame {
         jLabel4.setBounds(42, 302, 182, 32);
 
         lbl_mtd_sc1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lbl_mtd_sc1.setText("Esperando ecuacion...");
+        lbl_mtd_sc1.setText("Esperando ecuación...");
         getContentPane().add(lbl_mtd_sc1);
         lbl_mtd_sc1.setBounds(42, 352, 193, 24);
 
@@ -272,7 +271,7 @@ public class Raices extends javax.swing.JFrame {
         jLabel5.setBounds(42, 394, 316, 32);
 
         lbl_mtd_sc2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lbl_mtd_sc2.setText("Esperando ecuacion...");
+        lbl_mtd_sc2.setText("Esperando ecuación...");
         getContentPane().add(lbl_mtd_sc2);
         lbl_mtd_sc2.setBounds(42, 444, 193, 24);
 
