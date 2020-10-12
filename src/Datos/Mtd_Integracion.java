@@ -85,9 +85,5 @@ public class Mtd_Integracion {
         return res;
     }
 
-    public static void main(String[] args) throws Exception {
-        Mtd_Integracion m = new Mtd_Integracion();
-        Expresion e = new Expresion();
-        System.out.println(e.Evaluar("exp(x)", 2));
-    }
+    
 }
