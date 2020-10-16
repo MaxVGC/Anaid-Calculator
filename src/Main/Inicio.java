@@ -31,8 +31,10 @@ public class Inicio extends javax.swing.JFrame {
         rsscalelabel.RSScaleLabel.setScaleLabel(icon_inicio_1, "src/assets/icon_r_e.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(icon_inicio_2, "src/assets/icon_a_c.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(icon_inicio_3, "src/assets/icon_integral.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(icon_inicio_4, "src/assets/icon_derivada.png");
         Lbl_Raices1.setFont(FP);
         Lbl_Raices2.setFont(FP);
+        Lbl_Raices3.setFont(FP);
         Lbl_Raices.setFont(FP);
         this.getContentPane().setBackground(Color.white);
     }
@@ -48,16 +50,18 @@ public class Inicio extends javax.swing.JFrame {
 
         btn_close = new javax.swing.JLabel();
         icon_logo = new javax.swing.JLabel();
+        icon_inicio_4 = new javax.swing.JLabel();
         icon_inicio_3 = new javax.swing.JLabel();
         icon_inicio_1 = new javax.swing.JLabel();
         Lbl_Raices = new javax.swing.JLabel();
         icon_inicio_2 = new javax.swing.JLabel();
+        Lbl_Raices3 = new javax.swing.JLabel();
         Lbl_Raices2 = new javax.swing.JLabel();
         Lbl_Raices1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMinimumSize(new java.awt.Dimension(400, 550));
+        setMinimumSize(new java.awt.Dimension(400, 560));
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(null);
@@ -77,6 +81,8 @@ public class Inicio extends javax.swing.JFrame {
         btn_close.setBounds(370, 0, 30, 30);
         getContentPane().add(icon_logo);
         icon_logo.setBounds(50, 20, 310, 140);
+        getContentPane().add(icon_inicio_4);
+        icon_inicio_4.setBounds(20, 470, 140, 80);
         getContentPane().add(icon_inicio_3);
         icon_inicio_3.setBounds(20, 370, 140, 80);
         getContentPane().add(icon_inicio_1);
@@ -93,6 +99,16 @@ public class Inicio extends javax.swing.JFrame {
         Lbl_Raices.setBounds(180, 190, 220, 50);
         getContentPane().add(icon_inicio_2);
         icon_inicio_2.setBounds(50, 280, 70, 70);
+
+        Lbl_Raices3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        Lbl_Raices3.setText("Derivacion Num.");
+        Lbl_Raices3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Lbl_Raices3MouseClicked(evt);
+            }
+        });
+        getContentPane().add(Lbl_Raices3);
+        Lbl_Raices3.setBounds(180, 480, 220, 50);
 
         Lbl_Raices2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         Lbl_Raices2.setText("Integracion Num.");
@@ -159,6 +175,16 @@ public class Inicio extends javax.swing.JFrame {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }    }//GEN-LAST:event_Lbl_Raices2MouseClicked
 
+    private void Lbl_Raices3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Lbl_Raices3MouseClicked
+        try {
+            Derivacion a = new Derivacion();
+            this.dispose();
+            a.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Lbl_Raices3MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -198,10 +224,12 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel Lbl_Raices;
     private javax.swing.JLabel Lbl_Raices1;
     private javax.swing.JLabel Lbl_Raices2;
+    private javax.swing.JLabel Lbl_Raices3;
     private javax.swing.JLabel btn_close;
     private javax.swing.JLabel icon_inicio_1;
     private javax.swing.JLabel icon_inicio_2;
     private javax.swing.JLabel icon_inicio_3;
+    private javax.swing.JLabel icon_inicio_4;
     private javax.swing.JLabel icon_logo;
     // End of variables declaration//GEN-END:variables
 }
