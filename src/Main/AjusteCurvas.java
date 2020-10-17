@@ -180,6 +180,10 @@ public class AjusteCurvas extends javax.swing.JFrame {
         grafica = new javax.swing.JPanel();
         btn_min = new javax.swing.JLabel();
         btn_max = new javax.swing.JLabel();
+        A5 = new javax.swing.JLabel();
+        A4 = new javax.swing.JLabel();
+        A3 = new javax.swing.JLabel();
+        A2 = new javax.swing.JLabel();
         A1 = new javax.swing.JLabel();
         A0 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -269,6 +273,22 @@ public class AjusteCurvas extends javax.swing.JFrame {
         });
         getContentPane().add(btn_max);
         btn_max.setBounds(285, 27, 40, 40);
+
+        A5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        getContentPane().add(A5);
+        A5.setBounds(510, 670, 100, 30);
+
+        A4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        getContentPane().add(A4);
+        A4.setBounds(510, 610, 100, 30);
+
+        A3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        getContentPane().add(A3);
+        A3.setBounds(510, 550, 100, 30);
+
+        A2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        getContentPane().add(A2);
+        A2.setBounds(330, 670, 100, 30);
 
         A1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         getContentPane().add(A1);
@@ -363,17 +383,82 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     String lineal = "(" + res[0] + ")+(" + res[1] + ")*x";
                     A0.setText("A0=" + res[0]);
                     A1.setText("A1=" + res[1]);
+                    A2.setText("");
+                    A3.setText("");
+                    A4.setText("");
+                    A5.setText("");
+
                     XYDataset paresDeDatos = generarDatos(lineal, (x.length - 1), x, y, eje);
                     JFreeChart diagrama = crearDiagrama(paresDeDatos);
                     chartPanel.setChart(diagrama);
                     break;
                 case 2:
+                    switch (grado.getSelectedIndex() + 1) {
+                        case 1:
+                            double[] res21 = ac.A_Pol_2(x, y);
+                            String pol_21 = "(" + res21[0] + ")+(" + res21[1] + ")*(x)+(" + res21[2] + ")*(x^2)";
+                            A0.setText("A0=" + res21[0]);
+                            A1.setText("A1=" + res21[1]);
+                            A2.setText("A2=" + res21[2]);
+                            A3.setText("");
+                            A4.setText("");
+                            A5.setText("");
+                            XYDataset paresDeDatos21 = generarDatos(pol_21, (x.length - 1), x, y, eje);
+                            JFreeChart diagrama21 = crearDiagrama(paresDeDatos21);
+                            chartPanel.setChart(diagrama21);
+                            break;
+                        case 2:
+                            double[] res22 = ac.A_Pol_3(x, y);
+                            String pol_22 = "(" + res22[0] + ")+(" + res22[1] + ")*(x)+(" + res22[2] + ")*(x^2)+(" + res22[3] + ")*(x^3)";
+                            A0.setText("A0=" + res22[0]);
+                            A1.setText("A1=" + res22[1]);
+                            A2.setText("A2=" + res22[2]);
+                            A3.setText("A3=" + res22[3]);
+                            A4.setText("");
+                            A5.setText("");
+                            XYDataset paresDeDatos22 = generarDatos(pol_22, (x.length - 1), x, y, eje);
+                            JFreeChart diagrama22 = crearDiagrama(paresDeDatos22);
+                            chartPanel.setChart(diagrama22);
+                            break;
+                        case 3:
+                            double[] res23 = ac.A_Pol_4(x, y);
+                            String pol_23 = "(" + res23[0] + ")+(" + res23[1] + ")*(x)+(" + res23[2] + ")*(x^2)+(" + res23[3] + ")*(x^3)+(" + res23[4] + ")*(x^4)";
+                            A0.setText("A0=" + res23[0]);
+                            A1.setText("A1=" + res23[1]);
+                            A2.setText("A2=" + res23[2]);
+                            A3.setText("A3=" + res23[3]);
+                            A4.setText("A4=" + res23[4]);
+                            A5.setText("");
+                            XYDataset paresDeDatos23 = generarDatos(pol_23, (x.length - 1), x, y, eje);
+                            JFreeChart diagrama23 = crearDiagrama(paresDeDatos23);
+                            chartPanel.setChart(diagrama23);
+                            break;
+                        case 4:
+                            double[] res24 = ac.A_Pol_5(x, y);
+                            String pol_24 = "(" + res24[0] + ")+(" + res24[1] + ")*(x)+(" + res24[2] + ")*(x^2)+(" + res24[3] + ")*(x^3)+(" + res24[4] + ")*(x^4)+(" + res24[5] + ")*(x^5)";
+                            A0.setText("A0=" + res24[0]);
+                            A1.setText("A1=" + res24[1]);
+                            A2.setText("A2=" + res24[2]);
+                            A3.setText("A3=" + res24[3]);
+                            A4.setText("A4=" + res24[4]);
+                            A5.setText("A5=" + res24[5]);
+
+                            XYDataset paresDeDatos24 = generarDatos(pol_24, (x.length - 1), x, y, eje);
+                            JFreeChart diagrama24 = crearDiagrama(paresDeDatos24);
+                            chartPanel.setChart(diagrama24);
+                            break;
+
+                    }
                     break;
                 case 3:
                     double[] res3 = ac.A_Exp(x, y);
                     String exp = "(" + res3[0] + ")*exp((" + res3[1] + ")*x)";
                     A0.setText("A0=" + res3[0]);
                     A1.setText("A1=" + res3[1]);
+                    A2.setText("");
+                    A3.setText("");
+                    A4.setText("");
+                    A5.setText("");
                     XYDataset paresDeDatos3 = generarDatos(exp, (x.length - 1), x, y, eje);
                     JFreeChart diagrama3 = crearDiagrama(paresDeDatos3);
                     chartPanel.setChart(diagrama3);
@@ -382,6 +467,10 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     double[] res4 = ac.A_Log(x, y);
                     A0.setText("A0=" + res4[0]);
                     A1.setText("A1=" + res4[1]);
+                    A2.setText("");
+                    A3.setText("");
+                    A4.setText("");
+                    A5.setText("");
                     String log = "(" + res4[0] + ")+(" + res4[1] + ")*log(x)";
                     XYDataset paresDeDatos4 = generarDatoslog(log, (x.length - 1), x, y, eje);
                     JFreeChart diagrama4 = crearDiagrama(paresDeDatos4);
@@ -392,6 +481,10 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     String pot = "(" + res5[0] + ")*(x^(" + res5[1] + "))";
                     A0.setText("A0=" + res5[0]);
                     A1.setText("A1=" + res5[1]);
+                    A2.setText("");
+                    A3.setText("");
+                    A4.setText("");
+                    A5.setText("");
                     XYDataset paresDeDatos5 = generarDatos(pot, (x.length - 1), x, y, eje);
                     JFreeChart diagrama5 = crearDiagrama(paresDeDatos5);
                     chartPanel.setChart(diagrama5);
@@ -463,6 +556,10 @@ public class AjusteCurvas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel A0;
     private javax.swing.JLabel A1;
+    private javax.swing.JLabel A2;
+    private javax.swing.JLabel A3;
+    private javax.swing.JLabel A4;
+    private javax.swing.JLabel A5;
     private javax.swing.JLabel btn_equal;
     private javax.swing.JLabel btn_max;
     private javax.swing.JLabel btn_min;
