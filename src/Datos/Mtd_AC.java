@@ -43,7 +43,6 @@ public class Mtd_AC {
         double xy = 0;
         double x2y = 0;
         int i = 0;
-        System.out.println("me trabe");
         do {
             x1 = x1 + x[i];
             x2 = x2 + (Math.pow(x[i], 2));
@@ -52,7 +51,6 @@ public class Mtd_AC {
             y1 = y1 + y[i];
             xy = xy + (x[i] * y[i]);
             x2y = x2y + ((Math.pow(x[i], 2)) * y[i]);
-            System.out.println("AH");
             i++;
         } while (i != (n));
         double[][] det = {{n, x1, x2}, {x1, x2, x3}, {x2, x3, x4}};
@@ -81,7 +79,6 @@ public class Mtd_AC {
         double x2y = 0;
         double x3y = 0;
         int i = 0;
-        System.out.println("me trabe");
         do {
             x1 = x1 + x[i];
             x2 = x2 + (Math.pow(x[i], 2));
@@ -95,7 +92,6 @@ public class Mtd_AC {
             x2y = x2y + ((Math.pow(x[i], 2)) * y[i]);
             x3y = x3y + ((Math.pow(x[i], 3)) * y[i]);
 
-            System.out.println("AH");
             i++;
         } while (i != (n));
         double[][] det = {{n, x1, x2, x3}, {x1, x2, x3, x4}, {x2, x3, x4, x5}, {x3, x4, x5, x6}};
@@ -133,7 +129,6 @@ public class Mtd_AC {
         double x4y = 0;
 
         int i = 0;
-        System.out.println("me trabe");
         do {
             x1 = x1 + x[i];
             x2 = x2 + (Math.pow(x[i], 2));
@@ -150,7 +145,6 @@ public class Mtd_AC {
             x3y = x3y + ((Math.pow(x[i], 3)) * y[i]);
             x4y = x4y + ((Math.pow(x[i], 4)) * y[i]);
 
-            System.out.println("AH");
             i++;
         } while (i != (n));
         double[][] det = {{n, x1, x2, x3, x4}, {x1, x2, x3, x4, x5}, {x2, x3, x4, x5, x6}, {x3, x4, x5, x6, x7}, {x4, x5, x6, x7, x8}};
@@ -193,7 +187,6 @@ public class Mtd_AC {
         double x5y = 0;
 
         int i = 0;
-        System.out.println("me trabe");
         do {
             x1 = x1 + x[i];
             x2 = x2 + (Math.pow(x[i], 2));
@@ -213,7 +206,6 @@ public class Mtd_AC {
             x4y = x4y + ((Math.pow(x[i], 4)) * y[i]);
             x5y = x5y + ((Math.pow(x[i], 5)) * y[i]);
 
-            System.out.println("AH");
             i++;
         } while (i != (n));
         double[][] det = {{n, x1, x2, x3, x4, x5}, {x1, x2, x3, x4, x5, x6}, {x2, x3, x4, x5, x6, x7}, {x3, x4, x5, x6, x7, x8}, {x4, x5, x6, x7, x8, x9}, {x5, x6, x7, x8, x9, x10}};
@@ -233,7 +225,6 @@ public class Mtd_AC {
         double detgf = determinante(detg);
 
         double[] res = {(detaf / detf), (detbf / detf), (detcf / detf), (detdf / detf), (detef / detf), (detgf / detf)};
-
         return res;
     }
 
@@ -356,6 +347,19 @@ public class Mtd_AC {
 
     public double det2x2(double x00, double x01, double x10, double x11) {
         return ((x00 * x11) - (x01 * x10));
+    }
+
+    public double error(String f, double[] x, double[] y, int grado) throws Exception {
+        Expresion e = new Expresion();
+        double aux = 0;
+        int i=0;
+        do {
+            aux=aux+(y[i]-e.Evaluar(f, x[i]))*(y[i]-e.Evaluar(f, x[i]));
+            i++;
+        } while (i!=x.length);
+        double r=Math.sqrt((aux)/(x.length-(grado+1)));
+        System.out.println(1-r);
+        return 1-r;
     }
 
     public double[] matriz2x2(double x00, double x01, double x10, double x11, double r1, double r2) {

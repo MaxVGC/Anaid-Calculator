@@ -180,6 +180,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
         grafica = new javax.swing.JPanel();
         btn_min = new javax.swing.JLabel();
         btn_max = new javax.swing.JLabel();
+        A6 = new javax.swing.JLabel();
         A5 = new javax.swing.JLabel();
         A4 = new javax.swing.JLabel();
         A3 = new javax.swing.JLabel();
@@ -273,6 +274,10 @@ public class AjusteCurvas extends javax.swing.JFrame {
         });
         getContentPane().add(btn_max);
         btn_max.setBounds(285, 27, 40, 40);
+
+        A6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        getContentPane().add(A6);
+        A6.setBounds(650, 550, 240, 30);
 
         A5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         getContentPane().add(A5);
@@ -387,7 +392,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     A3.setText("");
                     A4.setText("");
                     A5.setText("");
-
+                    A6.setText("Error estandar: " + ac.error(lineal, x, y, 1));
                     XYDataset paresDeDatos = generarDatos(lineal, (x.length - 1), x, y, eje);
                     JFreeChart diagrama = crearDiagrama(paresDeDatos);
                     chartPanel.setChart(diagrama);
@@ -403,6 +408,9 @@ public class AjusteCurvas extends javax.swing.JFrame {
                             A3.setText("");
                             A4.setText("");
                             A5.setText("");
+                            A6.setText("Error estandar: " + ac.error(pol_21, x, y, 1));
+                            ac.error(pol_21, x, y, 2);
+
                             XYDataset paresDeDatos21 = generarDatos(pol_21, (x.length - 1), x, y, eje);
                             JFreeChart diagrama21 = crearDiagrama(paresDeDatos21);
                             chartPanel.setChart(diagrama21);
@@ -416,6 +424,8 @@ public class AjusteCurvas extends javax.swing.JFrame {
                             A3.setText("A3=" + res22[3]);
                             A4.setText("");
                             A5.setText("");
+                            A6.setText("Error estandar: " + ac.error(pol_22, x, y, 1));
+
                             XYDataset paresDeDatos22 = generarDatos(pol_22, (x.length - 1), x, y, eje);
                             JFreeChart diagrama22 = crearDiagrama(paresDeDatos22);
                             chartPanel.setChart(diagrama22);
@@ -429,12 +439,15 @@ public class AjusteCurvas extends javax.swing.JFrame {
                             A3.setText("A3=" + res23[3]);
                             A4.setText("A4=" + res23[4]);
                             A5.setText("");
+                            A6.setText("Error estandar: " + ac.error(pol_23, x, y, 1));
+
                             XYDataset paresDeDatos23 = generarDatos(pol_23, (x.length - 1), x, y, eje);
                             JFreeChart diagrama23 = crearDiagrama(paresDeDatos23);
                             chartPanel.setChart(diagrama23);
                             break;
                         case 4:
                             double[] res24 = ac.A_Pol_5(x, y);
+                            System.out.println(res24[0]);
                             String pol_24 = "(" + res24[0] + ")+(" + res24[1] + ")*(x)+(" + res24[2] + ")*(x^2)+(" + res24[3] + ")*(x^3)+(" + res24[4] + ")*(x^4)+(" + res24[5] + ")*(x^5)";
                             A0.setText("A0=" + res24[0]);
                             A1.setText("A1=" + res24[1]);
@@ -442,12 +455,12 @@ public class AjusteCurvas extends javax.swing.JFrame {
                             A3.setText("A3=" + res24[3]);
                             A4.setText("A4=" + res24[4]);
                             A5.setText("A5=" + res24[5]);
+                            A6.setText("Error estandar: " + ac.error(pol_24, x, y, 1));
 
                             XYDataset paresDeDatos24 = generarDatos(pol_24, (x.length - 1), x, y, eje);
                             JFreeChart diagrama24 = crearDiagrama(paresDeDatos24);
                             chartPanel.setChart(diagrama24);
                             break;
-
                     }
                     break;
                 case 3:
@@ -459,19 +472,24 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     A3.setText("");
                     A4.setText("");
                     A5.setText("");
+                    A6.setText("Error estandar: " + ac.error(exp, x, y, 1));
+
                     XYDataset paresDeDatos3 = generarDatos(exp, (x.length - 1), x, y, eje);
                     JFreeChart diagrama3 = crearDiagrama(paresDeDatos3);
                     chartPanel.setChart(diagrama3);
                     break;
                 case 4:
                     double[] res4 = ac.A_Log(x, y);
+                    String log = "(" + res4[0] + ")+(" + res4[1] + ")*log(x)";
+
                     A0.setText("A0=" + res4[0]);
                     A1.setText("A1=" + res4[1]);
                     A2.setText("");
                     A3.setText("");
                     A4.setText("");
                     A5.setText("");
-                    String log = "(" + res4[0] + ")+(" + res4[1] + ")*log(x)";
+                    A6.setText("Error estandar: " + ac.error(log, x, y, 1));
+
                     XYDataset paresDeDatos4 = generarDatoslog(log, (x.length - 1), x, y, eje);
                     JFreeChart diagrama4 = crearDiagrama(paresDeDatos4);
                     chartPanel.setChart(diagrama4);
@@ -485,6 +503,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
                     A3.setText("");
                     A4.setText("");
                     A5.setText("");
+                    A6.setText("Error estandar: " + ac.error(pot, x, y, 1));
                     XYDataset paresDeDatos5 = generarDatos(pot, (x.length - 1), x, y, eje);
                     JFreeChart diagrama5 = crearDiagrama(paresDeDatos5);
                     chartPanel.setChart(diagrama5);
@@ -560,6 +579,7 @@ public class AjusteCurvas extends javax.swing.JFrame {
     private javax.swing.JLabel A3;
     private javax.swing.JLabel A4;
     private javax.swing.JLabel A5;
+    private javax.swing.JLabel A6;
     private javax.swing.JLabel btn_equal;
     private javax.swing.JLabel btn_max;
     private javax.swing.JLabel btn_min;
