@@ -215,5 +215,11 @@ public class Expresion {
         Expresion exp = new Expresion(funcion);
         return exp.evaluar(b);
     }
+    
+    public double Evaluart(String a, double b) throws Exception {
+        String funcion = a;
+        Expresion exp = new Expresion(funcion);
+        return exp.evaluar(b);
+    }
 
 }

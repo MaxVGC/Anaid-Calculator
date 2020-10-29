@@ -17,30 +17,36 @@ import java.util.Scanner;
 
 public class Mtd_Taylor {
 
-    
+    public double Taylor(String a , double b) throws Exception{
+        Expresion e=new Expresion();
+        derivar(a);
+        return e.Evaluart(a, b);
+    }
     public String derivar(String funcion) {
-        String derivada = "";
-        String respecto = "x";
+        String fpr = "";
+        String variable = "x";
 
-        DJep derivador = new DJep();
+        DJep dev = new DJep();
 
-        derivador.addStandardFunctions();
-        derivador.addStandardConstants();
-        derivador.addComplex();
-        derivador.setAllowUndeclared(true);
-        derivador.setAllowAssignment(true);
-        derivador.setImplicitMul(true);
-        derivador.addStandardDiffRules();
+        dev.addStandardFunctions();
+        dev.addStandardConstants();
+        dev.addComplex();
+        dev.setAllowUndeclared(true);
+        dev.setAllowAssignment(true);
+        dev.setImplicitMul(true);
+        dev.addStandardDiffRules();
 
         try {
-            Node diff = derivador.parse(funcion);
-            diff = derivador.differentiate(diff, respecto);
-            diff = derivador.simplify(diff);
-            derivada = derivador.toString(diff);
+            Node diff = dev.parse(funcion);
+            diff = dev.differentiate(diff, variable);
+            diff = dev.simplify(diff);
+            fpr = dev.toString(diff);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return derivada;
+        
+        
+        return fpr;
     }
 
 }

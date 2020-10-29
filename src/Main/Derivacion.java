@@ -31,6 +31,8 @@ public class Derivacion extends javax.swing.JFrame {
         lbl_8.setFont(FP);
         lbl_9.setFont(FP);
         lbl_10.setFont(FP);
+        clc.setFont(FP);
+
         rsscalelabel.RSScaleLabel.setScaleLabel(lbl_3, "src/assets/f_prima_1.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(lbl_4, "src/assets/f_prima_2.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(lbl_5, "src/assets/f_prima_3.png");
@@ -68,7 +70,6 @@ public class Derivacion extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(455, 500));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(455, 500));
         setResizable(false);
 
         lbl_1.setText("Funcion a derivar");

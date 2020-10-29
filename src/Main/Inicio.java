@@ -6,6 +6,7 @@
 package Main;
 
 import Datos.Fuentes;
+import Datos.Mtd_Taylor;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.logging.Level;
@@ -32,9 +33,11 @@ public class Inicio extends javax.swing.JFrame {
         rsscalelabel.RSScaleLabel.setScaleLabel(icon_inicio_2, "src/assets/icon_a_c.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(icon_inicio_3, "src/assets/icon_integral.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(icon_inicio_4, "src/assets/icon_derivada.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(icon_inicio_5, "src/assets/icon_t.png");
         Lbl_Raices1.setFont(FP);
         Lbl_Raices2.setFont(FP);
         Lbl_Raices3.setFont(FP);
+        Lbl_Raices4.setFont(FP);
         Lbl_Raices.setFont(FP);
         this.getContentPane().setBackground(Color.white);
     }
@@ -50,18 +53,20 @@ public class Inicio extends javax.swing.JFrame {
 
         btn_close = new javax.swing.JLabel();
         icon_logo = new javax.swing.JLabel();
+        icon_inicio_5 = new javax.swing.JLabel();
         icon_inicio_4 = new javax.swing.JLabel();
         icon_inicio_3 = new javax.swing.JLabel();
         icon_inicio_1 = new javax.swing.JLabel();
         Lbl_Raices = new javax.swing.JLabel();
         icon_inicio_2 = new javax.swing.JLabel();
+        Lbl_Raices4 = new javax.swing.JLabel();
         Lbl_Raices3 = new javax.swing.JLabel();
         Lbl_Raices2 = new javax.swing.JLabel();
         Lbl_Raices1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMinimumSize(new java.awt.Dimension(400, 560));
+        setMinimumSize(new java.awt.Dimension(400, 637));
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(null);
@@ -81,6 +86,8 @@ public class Inicio extends javax.swing.JFrame {
         btn_close.setBounds(370, 0, 30, 30);
         getContentPane().add(icon_logo);
         icon_logo.setBounds(50, 20, 310, 140);
+        getContentPane().add(icon_inicio_5);
+        icon_inicio_5.setBounds(20, 550, 140, 80);
         getContentPane().add(icon_inicio_4);
         icon_inicio_4.setBounds(20, 470, 140, 80);
         getContentPane().add(icon_inicio_3);
@@ -99,6 +106,16 @@ public class Inicio extends javax.swing.JFrame {
         Lbl_Raices.setBounds(180, 190, 220, 50);
         getContentPane().add(icon_inicio_2);
         icon_inicio_2.setBounds(50, 280, 70, 70);
+
+        Lbl_Raices4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        Lbl_Raices4.setText("Serie de taylor");
+        Lbl_Raices4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Lbl_Raices4MouseClicked(evt);
+            }
+        });
+        getContentPane().add(Lbl_Raices4);
+        Lbl_Raices4.setBounds(180, 570, 220, 50);
 
         Lbl_Raices3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         Lbl_Raices3.setText("Derivacion Num.");
@@ -185,6 +202,15 @@ public class Inicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Lbl_Raices3MouseClicked
 
+    private void Lbl_Raices4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Lbl_Raices4MouseClicked
+        try {
+            Taylor a=new Taylor();
+            this.dispose();
+            a.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }    }//GEN-LAST:event_Lbl_Raices4MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -225,11 +251,13 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel Lbl_Raices1;
     private javax.swing.JLabel Lbl_Raices2;
     private javax.swing.JLabel Lbl_Raices3;
+    private javax.swing.JLabel Lbl_Raices4;
     private javax.swing.JLabel btn_close;
     private javax.swing.JLabel icon_inicio_1;
     private javax.swing.JLabel icon_inicio_2;
     private javax.swing.JLabel icon_inicio_3;
     private javax.swing.JLabel icon_inicio_4;
+    private javax.swing.JLabel icon_inicio_5;
     private javax.swing.JLabel icon_logo;
     // End of variables declaration//GEN-END:variables
 }
